@@ -14,9 +14,14 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/tailwindcss": "^6.8.0",
     "eslint": "^8.52.0",
     "nuxt": "^3.8.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@heroicons/vue": "^2.0.18",
+    "@nuxt/image": "^1.0.0"
   }
 }
