@@ -4,8 +4,8 @@
     :class="[
       'flex items-center justify-center p-4 border-b-2 group',
       current
-        ? 'text-blue-600 border-blue-600 active dark:text-blue-500 dark:border-blue-500'
-        : 'border-transparent hover:border-gray-300'
+        ? 'border-black dark:border-white'
+        : 'border-transparent hover:border-gray-400'
     ]"
   >
     <slot name="icon" />

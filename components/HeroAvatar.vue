@@ -7,8 +7,8 @@
       height="256"
       class="w-16 h-16 rounded-full"
     />
-    <p class="text-xl font-medium ml-4">
+    <span class="text-xl font-medium ml-4">
       Aapo Kiiso
-    </p>
+    </span>
   </div>
 </template>

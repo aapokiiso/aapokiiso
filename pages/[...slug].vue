@@ -1,5 +1,5 @@
 <template>
-  <main>
-    <ContentDoc />
-  </main>
+  <ProseContent>
+    <ContentDoc class="p-6" />
+  </ProseContent>
 </template>

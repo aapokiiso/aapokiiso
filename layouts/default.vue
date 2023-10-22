@@ -1,5 +1,5 @@
 <template>
-  <main class="flex min-h-screen justify-center">
+  <div class="flex min-h-screen justify-center">
     <div class="max-w-lg w-full">
       <header>
         <div class="flex justify-center p-4">
@@ -9,7 +9,9 @@
         <MainMenu />
       </header>
 
-      <slot />
+      <main>
+        <slot />
+      </main>
     </div>
-  </main>
+  </div>
 </template>
