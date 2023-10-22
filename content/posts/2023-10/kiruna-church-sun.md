@@ -9,3 +9,5 @@ date: 2023-10-22 10:30:00 +02:00
 ---
 
 Kiruna church in the morning sunlight.
+
+*(This is a test of an image post)*

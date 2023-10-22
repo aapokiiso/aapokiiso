@@ -18,6 +18,13 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: 'Aapo Kiiso',
+  meta: [
+    { name: 'description', content: 'Personal website of Aapo Kiiso.' },
+  ],
+})
+
 const { data: content } = await useAsyncData(
   'feed',
   () => queryContent('/posts').sort({ date: -1 }).find(),
