@@ -1,3 +1,4 @@
+import path from 'node:path'
 import { getPosts, cachePost } from './utils/lemmy'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -15,25 +16,42 @@ export default defineNuxtConfig({
         : 'Europe/Helsinki',
     },
     lemmy: {
-      // TODO move to env variables
-      baseUrl: 'https://lemmy.aapo.kii.so',
-      community: 'general',
+      baseUrl: process.env.NUXT_LEMMY_BASE_URL,
+      community: process.env.NUXT_LEMMY_COMMUNITY,
     },
   },
-  nitro: {
-    hooks: {
-      'rollup:before': async (nitro) => {
-        const { baseUrl, community } = nitro.options.runtimeConfig.lemmy
+  hooks: {
+    'nitro:build:public-assets': async (nitro) => {
+      const { baseUrl, community } = nitro.options.runtimeConfig.lemmy
 
-        let posts = []
-        let page = 1
-        do {
-          console.log(`Get Lemmy posts (page ${page})...`)
-          posts = await getPosts(baseUrl, community, { page })
-          await Promise.all(posts.map(cachePost))
-          page += 1
-        } while (posts.length)
-      },
+      if (!baseUrl) {
+        console.error('Lemmy base URL not configured.')
+        return
+      }
+
+      if (!community) {
+        console.error('Lemmy community not configured.')
+        return
+      }
+
+      // TODO check if there is a better alternative,
+      // maybe as as a @nuxt/content source in .nuxt
+      // const contentCacheDir = nitro.options.devStorage['cache:content']?.base
+
+      const postsDir = path.join(__dirname, 'content', 'posts')
+      const mediaDir = path.join(nitro.options.output.publicDir, 'media')
+
+      let posts = []
+      let page = 1
+      do {
+        // TODO cache only new/updated posts since last build
+        console.log(`Caching Lemmy posts (page ${page})...`)
+        posts = await getPosts(baseUrl, community, { page })
+        await Promise.all(
+          posts.map(post => cachePost(post, { postsDir, mediaDir })),
+        )
+        page += 1
+      } while (posts.length)
     },
   },
 })

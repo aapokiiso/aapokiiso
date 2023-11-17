@@ -38,5 +38,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const resizedWidth = 1024
-const resizedHeight = Math.round(resizedWidth * (props.content.height / props.content.width))
+const resizedHeight = props.content.width && props.content.height
+  ? Math.round(resizedWidth * (props.content.height / props.content.width))
+  : undefined
 </script>
