@@ -1,5 +1,8 @@
 import path from 'node:path'
+import { createResolver } from '@nuxt/kit'
 import { getPosts, cachePost } from './utils/lemmy'
+
+const { resolve } = createResolver(import.meta.url)
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -20,6 +23,14 @@ export default defineNuxtConfig({
       community: process.env.NUXT_LEMMY_COMMUNITY,
     },
   },
+  content: {
+    sources: {
+      lemmy: {
+        driver: 'fs',
+        base: resolve('.nuxt/content-cache/lemmy'),
+      },
+    },
+  },
   hooks: {
     'nitro:build:public-assets': async (nitro) => {
       const { baseUrl, community } = nitro.options.runtimeConfig.lemmy
@@ -34,11 +45,7 @@ export default defineNuxtConfig({
         return
       }
 
-      // TODO check if there is a better alternative,
-      // maybe as as a @nuxt/content source in .nuxt
-      // const contentCacheDir = nitro.options.devStorage['cache:content']?.base
-
-      const postsDir = path.join(__dirname, 'content', 'posts')
+      const cacheDir = nitro.options.runtimeConfig.content.sources.lemmy.base
       const mediaDir = path.join(nitro.options.output.publicDir, 'media')
 
       let posts = []
@@ -48,7 +55,7 @@ export default defineNuxtConfig({
         console.log(`Caching Lemmy posts (page ${page})...`)
         posts = await getPosts(baseUrl, community, { page })
         await Promise.all(
-          posts.map(post => cachePost(post, { postsDir, mediaDir })),
+          posts.map(post => cachePost(post, { cacheDir, mediaDir })),
         )
         page += 1
       } while (posts.length)

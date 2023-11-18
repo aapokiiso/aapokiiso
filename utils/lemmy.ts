@@ -116,7 +116,7 @@ ${contentBody}
 `
 }
 
-export const cachePost = async (post: Post, { postsDir, mediaDir }: { postsDir: string, mediaDir: string }): Promise<void> => {
+export const cachePost = async (post: Post, { cacheDir, mediaDir }: { cacheDir: string, mediaDir: string }): Promise<void> => {
   const dateSlug = mapDateSlug(post)
   const titleSlug = mapTitleSlug(post)
 
@@ -134,7 +134,7 @@ export const cachePost = async (post: Post, { postsDir, mediaDir }: { postsDir: 
   }
 
   if (meta) {
-    const filePath = path.join(postsDir, dateSlug, `${titleSlug}.md`)
+    const filePath = path.join(cacheDir, 'posts', dateSlug, `${titleSlug}.md`)
     const content = mapPostContent(post, meta)
 
     await fs.mkdir(path.dirname(filePath), { recursive: true })
