@@ -12,6 +12,10 @@ interface PostImage {
 
 type PostMeta = Record<string, string|number|undefined>
 
+interface CacheManifest {
+  timestamp: string
+}
+
 export const getPosts = async (baseUrl: string, community: string, { page = 1, limit = 25 }: {page?: number, limit?: number}): Promise<Post[]> => {
   const client = new LemmyHttp(baseUrl)
 
@@ -141,5 +145,26 @@ export const cachePost = async (post: Post, { cacheDir, mediaDir }: { cacheDir: 
     await fs.writeFile(filePath, content)
   } else {
     console.error('Invalid meta information for post', post.id)
+  }
+}
+
+export const readCacheManifest = async (manifestDir: string): Promise<CacheManifest|undefined> => {
+  try {
+    const json = await fs.readFile(path.join(manifestDir, 'lemmy-cache-manifest.json'))
+
+    return JSON.parse(json.toString('utf-8'))
+  } catch (e) {
+    return undefined
+  }
+}
+
+export const writeCacheManifest = async (manifestDir: string, manifest: CacheManifest): Promise<void> => {
+  try {
+    const json = JSON.stringify(manifest)
+
+    await fs.mkdir(manifestDir, { recursive: true })
+    await fs.writeFile(path.join(manifestDir, 'lemmy-cache-manifest.json'), json)
+  } catch (e) {
+    console.error('Failed to write cache manifest file')
   }
 }

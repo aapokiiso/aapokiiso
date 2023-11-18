@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { createResolver } from '@nuxt/kit'
-import { getPosts, cachePost } from './utils/lemmy'
+import { getPosts, cachePost, readCacheManifest, writeCacheManifest } from './utils/lemmy'
 
 const { resolve } = createResolver(import.meta.url)
 
@@ -45,20 +45,58 @@ export default defineNuxtConfig({
         return
       }
 
+      // TODO can't be in build dir because it is cleared on every build
       const cacheDir = nitro.options.runtimeConfig.content.sources.lemmy.base
       const mediaDir = path.join(nitro.options.output.publicDir, 'media')
+
+      const prevManifest = await readCacheManifest(cacheDir)
+
+      const cutoffTimestamp = prevManifest?.timestamp
+        ? new Date(prevManifest.timestamp)
+        : null
+
+      if (cutoffTimestamp) {
+        console.log(`Lemmy posts cache cut-off timestamp is ${cutoffTimestamp.toISOString()}`)
+      } else {
+        console.log('Caching all Lemmy posts, no cache cut-off timestamp')
+      }
+
+      const buildStartedAt = new Date()
 
       let posts = []
       let page = 1
       do {
-        // TODO cache only new/updated posts since last build
         console.log(`Caching Lemmy posts (page ${page})...`)
+
         posts = await getPosts(baseUrl, community, { page })
+
+        const postsToCache = posts
+          .filter((post) => {
+            if (cutoffTimestamp) {
+              // TODO make sure no timezone issues
+              const postTimestamp = new Date(post.updated || post.published)
+
+              return postTimestamp >= cutoffTimestamp
+            }
+
+            // No previous build, cache all posts
+            return true
+          })
+
+        console.log(`Caching ${postsToCache.length} out of ${posts.length} found posts`)
+
         await Promise.all(
-          posts.map(post => cachePost(post, { cacheDir, mediaDir })),
+          postsToCache.map(post => cachePost(post, { cacheDir, mediaDir })),
         )
+
         page += 1
       } while (posts.length)
+
+      const manifest = {
+        timestamp: buildStartedAt.toISOString(),
+      }
+
+      await writeCacheManifest(cacheDir, manifest)
     },
   },
 })
