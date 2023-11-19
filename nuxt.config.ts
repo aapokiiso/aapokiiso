@@ -1,8 +1,7 @@
 import path from 'node:path'
-import { createResolver } from '@nuxt/kit'
-import { getPosts, cachePost, readCacheManifest, writeCacheManifest } from './utils/lemmy'
-
-const { resolve } = createResolver(import.meta.url)
+import { copyPublicAssets } from 'nitropack'
+import { zonedTimeToUtc } from 'date-fns-tz'
+import { getPosts, cachePost, purgePost, readCacheManifest, writeCacheManifest, isRemovedPost } from './utils/lemmy'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -21,35 +20,26 @@ export default defineNuxtConfig({
     lemmy: {
       baseUrl: process.env.NUXT_LEMMY_BASE_URL,
       community: process.env.NUXT_LEMMY_COMMUNITY,
-    },
-  },
-  content: {
-    sources: {
-      lemmy: {
-        driver: 'fs',
-        base: resolve('.nuxt/content-cache/lemmy'),
-      },
+      username: process.env.NUXT_LEMMY_USERNAME,
+      password: process.env.NUXT_LEMMY_PASSWORD,
     },
   },
   hooks: {
     'nitro:build:public-assets': async (nitro) => {
-      const { baseUrl, community } = nitro.options.runtimeConfig.lemmy
+      const { baseUrl, community, username, password } = nitro.options.runtimeConfig.lemmy
 
-      if (!baseUrl) {
-        console.error('Lemmy base URL not configured.')
+      if (!(baseUrl && community && username && password)) {
+        console.error('Lemmy not configured properly.')
         return
       }
 
-      if (!community) {
-        console.error('Lemmy community not configured.')
-        return
-      }
+      // Nitro srcDir is the server/ directory inside Nuxt's srcDir.
+      const nuxtSrcDir = path.dirname(nitro.options.srcDir)
+      const cacheManifestDir = nuxtSrcDir
+      const contentDir = path.join(nuxtSrcDir, 'content')
+      const mediaDir = path.join(nuxtSrcDir, 'public', 'media')
 
-      // TODO can't be in build dir because it is cleared on every build
-      const cacheDir = nitro.options.runtimeConfig.content.sources.lemmy.base
-      const mediaDir = path.join(nitro.options.output.publicDir, 'media')
-
-      const prevManifest = await readCacheManifest(cacheDir)
+      const prevManifest = await readCacheManifest(cacheManifestDir)
 
       const cutoffTimestamp = prevManifest?.timestamp
         ? new Date(prevManifest.timestamp)
@@ -61,20 +51,30 @@ export default defineNuxtConfig({
         console.log('Caching all Lemmy posts, no cache cut-off timestamp')
       }
 
-      const buildStartedAt = new Date()
+      const cacheStartedAt = new Date()
 
       let posts = []
       let page = 1
       do {
-        console.log(`Caching Lemmy posts (page ${page})...`)
+        console.log(`Iterating over Lemmy posts (page ${page})...`)
 
-        posts = await getPosts(baseUrl, community, { page })
+        posts = await getPosts(baseUrl, community, username, password, { page })
 
-        const postsToCache = posts
+        const deletedPosts = posts.filter(post => isRemovedPost(post))
+
+        console.log(`Found ${deletedPosts.length} deleted out of ${posts.length} posts`)
+
+        // TODO figure out why /contact 404s when any post is purged from content cache
+        await Promise.all(
+          deletedPosts.map(post => purgePost(post, { contentDir, mediaDir })),
+        )
+
+        const changedPosts = posts
+          .filter(post => !isRemovedPost(post))
           .filter((post) => {
             if (cutoffTimestamp) {
-              // TODO make sure no timezone issues
-              const postTimestamp = new Date(post.updated || post.published)
+              // Lemmy timestamps are in UTC but ambiguous, can't use Date constructor
+              const postTimestamp = zonedTimeToUtc(post.updated || post.published, 'UTC')
 
               return postTimestamp >= cutoffTimestamp
             }
@@ -83,20 +83,21 @@ export default defineNuxtConfig({
             return true
           })
 
-        console.log(`Caching ${postsToCache.length} out of ${posts.length} found posts`)
+        console.log(`Found ${changedPosts.length} changed out of ${posts.length} posts`)
 
         await Promise.all(
-          postsToCache.map(post => cachePost(post, { cacheDir, mediaDir })),
+          changedPosts.map(post => cachePost(post, { contentDir, mediaDir })),
         )
 
         page += 1
       } while (posts.length)
 
       const manifest = {
-        timestamp: buildStartedAt.toISOString(),
+        timestamp: cacheStartedAt.toISOString(),
       }
 
-      await writeCacheManifest(cacheDir, manifest)
+      await writeCacheManifest(cacheManifestDir, manifest)
+      await copyPublicAssets(nitro)
     },
   },
 })
