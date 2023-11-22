@@ -24,6 +24,4 @@ logs
 !.env.example
 
 # Generated content
-/content-manifest.json
-/content/posts
-/public/media
+/content-lemmy

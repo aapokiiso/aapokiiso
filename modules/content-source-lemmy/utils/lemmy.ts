@@ -1,7 +1,8 @@
 import path from 'node:path'
 import fs from 'node:fs/promises'
 import sizeOf from 'image-size'
-import { Post, LemmyHttp, Login } from 'lemmy-js-client'
+import type { Post } from 'lemmy-js-client'
+import { LemmyHttp } from 'lemmy-js-client'
 
 interface PostImage {
   src: string,
@@ -13,7 +14,7 @@ interface PostImage {
 type PostMeta = Record<string, string|number|undefined>
 
 interface CacheManifest {
-  timestamp: string
+  cachedAt: string
 }
 
 export const getPosts = async (baseUrl: string, community: string, username: string, password: string, { page = 1, limit = 25 }: {page?: number, limit?: number}): Promise<Post[]> => {
@@ -35,7 +36,7 @@ export const getPosts = async (baseUrl: string, community: string, username: str
 
     return response.posts.map(({ post }) => post)
   } catch (e) {
-    console.error(e)
+    console.error('Failed to fetch posts', e)
 
     return []
   }
@@ -195,7 +196,7 @@ export const purgePost = async (post: Post, { contentDir, mediaDir }: { contentD
 
 export const readCacheManifest = async (dir: string): Promise<CacheManifest|undefined> => {
   try {
-    const json = await fs.readFile(path.join(dir, 'content-manifest.json'))
+    const json = await fs.readFile(path.join(dir, 'manifest.json'))
 
     return JSON.parse(json.toString('utf-8'))
   } catch (e) {
@@ -208,7 +209,7 @@ export const writeCacheManifest = async (dir: string, manifest: CacheManifest): 
     const json = JSON.stringify(manifest)
 
     await fs.mkdir(dir, { recursive: true })
-    await fs.writeFile(path.join(dir, 'content-manifest.json'), json)
+    await fs.writeFile(path.join(dir, 'manifest.json'), json)
   } catch (e) {
     console.error('Failed to write cache manifest file')
   }
