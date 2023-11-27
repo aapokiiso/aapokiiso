@@ -128,13 +128,13 @@ const mapPostContent = (post: Post, meta: PostMeta): string => {
     .map(key => `${key}: ${meta[key]}`)
     .join('\n')
 
-  const contentBody = post.body
-
   return `---
 ${contentMeta}
 ---
 
-${contentBody}
+# ${post.name}
+
+${post.body}
 `
 }
 
