@@ -1,17 +1,18 @@
 <template>
-  <div class="flex min-h-screen justify-center">
-    <div class="max-w-lg w-full">
-      <header>
-        <div class="flex justify-center p-4">
-          <HeroAvatar />
-        </div>
-
-        <MainMenu />
-      </header>
-
-      <main>
-        <slot />
-      </main>
-    </div>
+  <div>
+    <header class="sticky top-0 bg-white dark:bg-gray-900 dark:text-white">
+      <MainMenu />
+    </header>
+    <main class="max-w-lg p-4">
+      <slot />
+    </main>
   </div>
 </template>
+
+<script setup lang="ts">
+useHead({
+  htmlAttrs: {
+    lang: 'en',
+  },
+})
+</script>

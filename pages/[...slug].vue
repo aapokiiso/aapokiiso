@@ -1,22 +1,29 @@
 <template>
-  <ContentDoc>
-    <template #default="{ doc }">
-      <div v-if="doc.layout === 'image'" class="py-6 px-2 md:px-0">
-        <FeedImageCard :content="doc" />
-      </div>
-      <ProseContent v-else class="p-6">
-        <ContentRenderer :value="doc" />
-      </ProseContent>
-    </template>
-    <template #not-found>
-      <ProseContent class="p-6">
-        <h1>Page not found</h1>
-        <p>
-          <NuxtLink to="/">
-            Back to front page
-          </NuxtLink>
-        </p>
-      </ProseContent>
-    </template>
-  </ContentDoc>
+  <div :class="useProseStyles()">
+    <ContentDoc>
+      <template #default="{ doc }">
+        <article>
+          <h1>
+            {{ doc.title }}
+          </h1>
+          <p v-if="doc.date" class="text-sm">
+            <time :datetime="doc.date">
+              {{ formatInDisplayTimeZone(doc.date, 'E, MMM d') }}
+            </time>
+          </p>
+          <ContentRenderer :value="doc" />
+        </article>
+      </template>
+      <template #not-found>
+        <h1>
+          Page not found
+        </h1>
+      </template>
+    </ContentDoc>
+    <p>
+      <NuxtLink to="/">
+        Back to front page
+      </NuxtLink>
+    </p>
+  </div>
 </template>

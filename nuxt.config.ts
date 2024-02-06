@@ -4,8 +4,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxt/image',
-    './modules/content-source-lemmy',
     '@nuxt/content',
+    '@nuxtjs/color-mode',
   ],
   runtimeConfig: {
     public: {
@@ -14,10 +14,7 @@ export default defineNuxtConfig({
         : 'Europe/Helsinki',
     },
   },
-  contentSourceLemmy: {
-    baseUrl: process.env.NUXT_LEMMY_BASE_URL,
-    community: process.env.NUXT_LEMMY_COMMUNITY,
-    username: process.env.NUXT_LEMMY_USERNAME,
-    password: process.env.NUXT_LEMMY_PASSWORD,
+  colorMode: {
+    classSuffix: '',
   },
 })

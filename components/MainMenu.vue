@@ -1,32 +1,43 @@
 <template>
-  <nav class="border-b border-gray-200 dark:border-gray-700">
-    <ul class="flex flex-wrap -mb-px font-medium text-center">
-      <li class="grow">
-        <MainMenuLink to="/" :current="currentPath === '/'">
-          <template #icon>
-            <Bars3BottomLeftIcon class="w-4 h-4 mr-2" />
-          </template>
-
-          Feed
-        </MainMenuLink>
-      </li>
-      <li class="grow-0">
-        <MainMenuLink to="/contact" :current="currentPath === '/contact'">
-          <template #icon>
-            <UserIcon class="w-4 h-4 mr-2" />
-          </template>
-
-          Contact
-        </MainMenuLink>
-      </li>
-    </ul>
-  </nav>
+  <div className="flex items-center p-4">
+    <NuxtImg
+      src="/me.jpg"
+      alt="Profile picture of me"
+      width="256"
+      height="256"
+      class="w-20 h-20 rounded-full"
+    />
+    <div class="ml-4 grow">
+      <div class="flex items-center">
+        <span class="text-2xl font-medium mb-1">Aapo Kiiso</span>
+        <span class="ml-auto">
+          <button class="p-2 rounded-full" @click="toggleDarkMode">
+            <SunIcon class="w-4 h-4 text-current" />
+            <span v-if="darkMode" class="sr-only">Switch to light theme</span>
+            <span v-else class="sr-only">Switch to dark theme</span>
+          </button>
+        </span>
+      </div>
+      <div :class="['flex items-center', useProseStyles()]">
+        <NuxtLink to="/">
+          home
+        </NuxtLink>
+        <NuxtLink to="/contact" class="ml-2">
+          contact
+        </NuxtLink>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import Bars3BottomLeftIcon from '@heroicons/vue/20/solid/esm/Bars3BottomLeftIcon'
-import UserIcon from '@heroicons/vue/20/solid/esm/UserIcon'
+import SunIcon from '@heroicons/vue/20/solid/esm/SunIcon'
 
-const route = useRoute()
-const currentPath = computed(() => route.path)
+const colorMode = useColorMode()
+
+const darkMode = computed(() => colorMode.value === 'dark')
+
+const toggleDarkMode = () => {
+  colorMode.preference = darkMode.value ? 'light' : 'dark'
+}
 </script>

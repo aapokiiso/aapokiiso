@@ -1,17 +1,23 @@
 <template>
-  <div class="px-2 md:px-0">
+  <div>
     <ol>
-      <li v-for="month in months" :key="month" class="my-4">
-        <h2 class="text-lg mb-2 text-center text-gray-500 dark:text-gray-400">
-          {{ formatInDisplayTimeZone(month, 'MMMM y') }}
-        </h2>
-
-        <ol>
-          <li v-for="item in contentByMonth[month]" :key="item._id" class="my-4">
-            <FeedImageCard v-if="item.layout === 'image'" :content="item" />
-            <FeedTextCard v-if="item.layout === 'text'" :content="item" />
-          </li>
-        </ol>
+      <li v-for="post in posts" :key="post._id" class="my-8 first:mt-0 last:mb-0">
+        <article :class="useProseStyles()">
+          <h2>
+            {{ post.title }}
+          </h2>
+          <p class="text-sm">
+            <time :datetime="post.date">
+              {{ formatInDisplayTimeZone(post.date, 'E, MMM d') }}
+            </time>
+          </p>
+          <ContentRenderer :value="post" :excerpt="!!post.excerpt" />
+          <p v-if="post.excerpt">
+            <NuxtLink :to="post._path">
+              Read more
+            </NuxtLink>
+          </p>
+        </article>
       </li>
     </ol>
   </div>
@@ -25,10 +31,8 @@ useHead({
   ],
 })
 
-const { data: content } = await useAsyncData(
+const { data: posts } = await useAsyncData(
   'feed',
   () => queryContent('/posts').sort({ date: -1 }).find(),
 )
-const contentByMonth = computed(() => content.value !== null ? groupByMonth(content.value) : {})
-const months = computed(() => Object.keys(contentByMonth.value))
 </script>
