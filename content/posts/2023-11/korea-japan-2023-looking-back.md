@@ -25,7 +25,7 @@ After a ferry ride back to Busan we cycled the East Coast route up to Sokcho in 
 
 ![Rainy parking lot campsite in the hills somewhere in Japan](/media/2023-11/korea-japan-2023-looking-back/IMG_20230407_102747.jpg)
 
-☝️ Wild-camping wasn't always a treat due to the weather, but the variation in camping spots was amazing
+☝️ Wild camping wasn't always a treat due to the weather, but the variation in camping spots was amazing
 
 ![Oskar fixing a broken tire on the curb in the dark](/media/2023-11/korea-japan-2023-looking-back/IMG_1294.jpg)
 

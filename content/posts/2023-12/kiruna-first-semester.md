@@ -10,14 +10,14 @@ Here are some pictures from my first semester here.
 
 <!-- more -->
 
-![My bike on the foreground with a street sign with directions to Kiruna on the background](/media/2023-12/kiruna-first-semester/IMG_3115.jpg)
+![My bike on the foreground with a street sign with directions to Kiruna in the background](/media/2023-12/kiruna-first-semester/IMG_3115.jpg)
 
-I took the the night train from Helsinki to Kolari in Finnish Lapland and cycled the remaining 214 km to Kiruna.
+I took the night train from Helsinki to Kolari in Finnish Lapland and cycled the remaining 214 km to Kiruna.
 
 ![Entrance to the Swedish Institute of Space Physics building in Kiruna](/media/2023-12/kiruna-first-semester/IMG_3124.jpg)
 
-With a high concentration of space-related organisations, such as the Esrange Space and the Swedish Institute of Space Physics IRF (pictured), Kiruna is the definitive focal point of the Swedish space scene.
-As it happens our campus is in the same building as IRF, which opens up possibilities for students to use their equipment.
+With a high concentration of space-related organizations, such as the Esrange Space and the Swedish Institute of Space Physics IRF (pictured), Kiruna is the definitive focal point of the Swedish space scene.
+As it happens our campus is in the same building as IRF, which opens up possibilities for students to meet researchers and perhaps even use their equipment.
 
 ![Snowy view of Kirunavaara](/media/2023-12/kiruna-first-semester/IMG_3258.jpg)
 
