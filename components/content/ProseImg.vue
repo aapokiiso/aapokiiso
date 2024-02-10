@@ -1,10 +1,13 @@
 <template>
-  <NuxtImg
+  <NuxtPicture
     :src="src"
     :alt="alt"
     :width="width"
     :height="height"
+    :densities="densities"
+    :format="format"
     :modifiers="modifiers"
+    :sizes="`${width}px`"
   />
 </template>
 
@@ -13,20 +16,22 @@
 // Original source:
 // https://github.com/nuxt-modules/mdc/blob/main/src/runtime/components/prose/ProseImg.vue
 
-import { defu } from 'defu'
-
 interface Props {
   src: string,
   alt?: string,
   width?: number,
   height?: number,
+  densities?: string,
+  format?: string,
   modifiers?: Record<string, any>
 }
 
 withDefaults(defineProps<Props>(), {
   alt: '',
-  width: undefined,
-  height: undefined,
-  modifiers: props => defu(props.modifiers, { format: 'webp' }),
+  width: 576, // xl width in Tailwind
+  height: 432, // 4:3 aspect ratio
+  densities: 'x1 x2',
+  format: 'webp,jpg',
+  modifiers: undefined,
 })
 </script>
