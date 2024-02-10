@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <header class="sticky top-0 bg-white dark:bg-gray-900 dark:text-white">
+  <div class="max-w-xl mx-auto">
+    <header class="sticky top-0 bg-white dark:bg-gray-900">
       <MainMenu />
     </header>
-    <main class="max-w-lg p-4">
+    <main class="p-4">
       <slot />
     </main>
   </div>
