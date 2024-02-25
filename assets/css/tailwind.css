@@ -11,3 +11,7 @@ body {
   background-color: theme('colors.gray.900');
   color: theme('colors.white');
 }
+
+a[href^="#"] {
+  text-decoration: none;
+}
