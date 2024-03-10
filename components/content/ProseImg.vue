@@ -19,14 +19,14 @@
 interface Props {
   src: string,
   alt?: string,
-  width?: number,
-  height?: number,
+  width?: number|string,
+  height?: number|string,
   densities?: string,
   format?: string,
   modifiers?: Record<string, any>
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   alt: '',
   width: 576, // xl width in Tailwind
   height: 432, // 4:3 aspect ratio
@@ -34,4 +34,16 @@ withDefaults(defineProps<Props>(), {
   format: 'webp,jpg',
   modifiers: undefined,
 })
+
+const width = computed(
+  () => typeof props.width === 'string'
+    ? parseInt(props.width)
+    : props.width,
+)
+
+const height = computed(
+  () => typeof props.height === 'string'
+    ? parseInt(props.height)
+    : props.height,
+)
 </script>
