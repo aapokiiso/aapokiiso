@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ol>
+    <ol v-if="posts?.length">
       <li v-for="post in posts" :key="post._id" class="my-8 first:mt-0 last:mb-0">
         <article :class="useProseStyles()">
           <h2>
@@ -20,6 +20,10 @@
         </article>
       </li>
     </ol>
+    <p v-else>
+      No matching posts found.
+    </p>
+    <PostsPagination />
   </div>
 </template>
 
@@ -31,8 +35,15 @@ useHead({
   ],
 })
 
+const { page, pageSize } = usePostsPagination()
+
 const { data: posts } = await useAsyncData(
-  'feed',
-  () => queryContent('/posts').sort({ date: -1 }).find(),
+  `feed_page_${page.value}`,
+  () => usePostsQuery()
+    .sort({ date: -1 })
+    .limit(pageSize)
+    .skip((page.value - 1) * pageSize)
+    .find(),
+  { watch: [page] },
 )
 </script>
