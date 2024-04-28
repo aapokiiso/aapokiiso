@@ -12,6 +12,9 @@ export default defineNuxtConfig({
       displayTimeZone: typeof process.env.NUXT_PUBLIC_DISPLAY_TIME_ZONE !== 'undefined'
         ? process.env.NUXT_PUBLIC_DISPLAY_TIME_ZONE
         : 'Europe/Helsinki',
+      postsPerPage: typeof process.env.NUXT_PUBLIC_POSTS_PER_PAGE !== 'undefined'
+        ? process.env.NUXT_PUBLIC_POSTS_PER_PAGE
+        : 5,
     },
   },
   colorMode: {
