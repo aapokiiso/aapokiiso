@@ -15,9 +15,7 @@ export default defineNuxtConfig({
   ],
 
   runtimeConfig: {
-    app: {
-      siteUrl,
-    },
+    siteUrl,
     public: {
       displayTimeZone: typeof process.env.NUXT_PUBLIC_DISPLAY_TIME_ZONE !== 'undefined'
         ? process.env.NUXT_PUBLIC_DISPLAY_TIME_ZONE
@@ -25,6 +23,12 @@ export default defineNuxtConfig({
       postsPerPage: typeof process.env.NUXT_PUBLIC_POSTS_PER_PAGE !== 'undefined'
         ? Number(process.env.NUXT_PUBLIC_POSTS_PER_PAGE)
         : 5,
+    },
+  },
+
+  nitro: {
+    prerender: {
+      routes: ['/sitemap.xml'],
     },
   },
 
@@ -46,7 +50,7 @@ export default defineNuxtConfig({
       item: {
         mapping: [
           ['link', '_path', (path) => {
-            const { siteUrl } = useRuntimeConfig().app
+            const { siteUrl } = useRuntimeConfig()
 
             return siteUrl + path
           }],

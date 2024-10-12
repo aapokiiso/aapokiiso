@@ -12,7 +12,7 @@
             </time>
           </p>
           <ContentRenderer :value="post" :excerpt="!!post.excerpt" />
-          <p v-if="post.excerpt">
+          <p v-show="post.excerpt">
             <NuxtLink :to="post._path">
               Read more
             </NuxtLink>
