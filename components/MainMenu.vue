@@ -11,11 +11,13 @@
       <div class="flex items-center">
         <span class="text-2xl font-medium mb-1">Aapo Kiiso</span>
         <span class="ml-auto">
-          <button class="p-2 rounded-full" @click="toggleDarkMode">
-            <SunIcon class="w-4 h-4 text-current" />
-            <span v-if="darkMode" class="sr-only">Switch to light theme</span>
-            <span v-else class="sr-only">Switch to dark theme</span>
-          </button>
+          <ClientOnly>
+            <button class="p-2 rounded-full" @click="toggleDarkMode">
+              <SunIcon class="w-4 h-4 text-current" />
+              <span v-if="darkMode" class="sr-only">Switch to light theme</span>
+              <span v-else class="sr-only">Switch to dark theme</span>
+            </button>
+          </ClientOnly>
         </span>
       </div>
       <div :class="['flex items-center', useProseStyles()]">
