@@ -35,7 +35,7 @@ import SunIcon from '@heroicons/vue/20/solid/esm/SunIcon'
 
 const colorMode = useColorMode()
 
-const darkMode = computed(() => colorMode.value === 'dark')
+const darkMode = computed(() => colorMode.preference === 'dark')
 
 const toggleDarkMode = () => {
   colorMode.preference = darkMode.value ? 'light' : 'dark'
