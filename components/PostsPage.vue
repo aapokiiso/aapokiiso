@@ -1,7 +1,7 @@
 <template>
   <div>
     <ol v-if="posts?.length">
-      <li v-for="post in posts" :key="post._id" class="my-8 first:mt-0 last:mb-0">
+      <li v-for="post in posts" :key="post.id" class="my-8 first:mt-0 last:mb-0">
         <article :class="useProseStyles()">
           <h2>
             {{ post.title }}
@@ -13,7 +13,7 @@
           </p>
           <ContentRenderer :value="post" :excerpt="!!post.excerpt" />
           <p v-show="post.excerpt">
-            <NuxtLink :to="post._path">
+            <NuxtLink :to="post.path">
               Read more
             </NuxtLink>
           </p>
@@ -38,9 +38,9 @@ const { postsPerPage } = useRuntimeConfig().public
 const { data: posts } = await useAsyncData(
   `feed_page_${props.page}`,
   () => usePostsQuery()
-    .sort({ date: -1 })
+    .order('date', 'DESC')
     .limit(postsPerPage)
     .skip((props.page - 1) * postsPerPage)
-    .find(),
+    .all(),
 )
 </script>

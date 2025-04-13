@@ -1,17 +1,24 @@
 import { SitemapStream, streamToPromise } from 'sitemap'
-import { serverQueryContent } from '#content/server'
 
 export default defineEventHandler(async (event) => {
   const { siteUrl } = useRuntimeConfig(event)
 
-  const docs = await serverQueryContent(event).find()
   const sitemap = new SitemapStream({
     hostname: siteUrl,
   })
 
-  for (const doc of docs) {
+  const roots = await queryCollection(event, 'roots').all()
+  for (const doc of roots) {
     sitemap.write({
-      url: doc._path,
+      url: doc.path,
+      changefreq: 'monthly',
+    })
+  }
+
+  const posts = await queryCollection(event, 'posts').all()
+  for (const doc of posts) {
+    sitemap.write({
+      url: doc.path,
       changefreq: 'monthly',
     })
   }

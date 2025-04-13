@@ -1,25 +1,17 @@
 <template>
   <div :class="useProseStyles()">
-    <ContentDoc>
-      <template #default="{ doc }">
-        <article>
-          <h1>
-            {{ doc.title }}
-          </h1>
-          <p v-if="doc.date" class="text-sm">
-            <time :datetime="doc.date">
-              {{ formatInDisplayTimeZone(doc.date, 'E, MMM d') }}
-            </time>
-          </p>
-          <ContentRenderer :value="doc" />
-        </article>
-      </template>
-      <template #not-found>
-        <h1>
-          Page not found
-        </h1>
-      </template>
-    </ContentDoc>
+    <article v-if="page">
+      <h1>
+        {{ page.title }}
+      </h1>
+      <ContentRenderer :value="page" />
+    </article>
+    <article v-else>
+      <h1>
+        Page not found
+      </h1>
+    </article>
+
     <p>
       <NuxtLink to="/">
         Back to front page
@@ -27,3 +19,10 @@
     </p>
   </div>
 </template>
+
+<script lang="ts" setup>
+const route = useRoute()
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection('roots').path(route.path).first()
+})
+</script>
