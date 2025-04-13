@@ -7,7 +7,7 @@
             {{ post.title }}
           </h2>
           <p class="text-sm">
-            <time :datetime="post.date">
+            <time :datetime="String(post.date)">
               {{ formatInDisplayTimeZone(post.date, 'E, MMM d') }}
             </time>
           </p>

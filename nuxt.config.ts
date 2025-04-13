@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxtjs/color-mode',
     'nuxt-feedme',
+    '@nuxt/scripts',
   ],
 
   runtimeConfig: {
