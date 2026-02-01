@@ -24,7 +24,7 @@
     "@unhead/vue": "^2.0.5",
     "date-fns-tz": "^3.0.0",
     "nuxt": "^4.3.0",
-    "nuxt-feedme": "^2.0.0-rc1",
+    "nuxt-feedme": "^2.1.0",
     "patch-package": "^8.0.0",
     "sitemap": "^9.0.0",
     "vue": "^3.3.4",

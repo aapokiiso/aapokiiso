@@ -1,0 +1,13 @@
+diff --git a/node_modules/nuxt-feedme/dist/module.mjs b/node_modules/nuxt-feedme/dist/module.mjs
+index 7db428f..b28174e 100644
+--- a/node_modules/nuxt-feedme/dist/module.mjs
++++ b/node_modules/nuxt-feedme/dist/module.mjs
+@@ -28,7 +28,7 @@ const module$1 = defineNuxtModule({
+           revisit: "6h",
+           fixDateFields: true,
+           feed: { title: "Generated title by nuxt-feedme!" },
+-          collections: ["content"]
++          collections: []
+         }
+       );
+     }

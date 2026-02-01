@@ -38,27 +38,18 @@ export default defineNuxtConfig({
   },
 
   feedme: {
-    defaults: {
-      rss: {
-        title: 'Aapo Kiiso',
-        description: 'Personal website of Aapo Kiiso',
-        link: siteUrl,
-        id: siteUrl,
-        author: { email: 'aapo@kii.so', name: 'Aapo Kiiso' },
-      },
-      content: {
-        collections: {
-          posts: x => x.all(),
+    feeds: {
+      common: {
+        feed: {
+          title: 'Aapo Kiiso',
+          description: 'Personal website of Aapo Kiiso',
+          link: siteUrl,
+          id: siteUrl,
+          author: { email: 'aapo@kii.so', name: 'Aapo Kiiso' }
         },
-        mapping: [
-          ['link', 'path', (path) => {
-            const { siteUrl } = useRuntimeConfig()
-
-            return siteUrl + path
-          }],
-        ],
-      },
-    },
+        collections: ['posts']
+      }
+    }
   },
 
   compatibilityDate: '2024-10-12',
