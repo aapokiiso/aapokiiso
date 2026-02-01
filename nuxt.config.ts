@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-feedme',
     '@nuxt/scripts',
+    '@nuxt/eslint',
   ],
 
   runtimeConfig: {

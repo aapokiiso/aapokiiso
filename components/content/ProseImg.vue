@@ -23,7 +23,7 @@ interface Props {
   height?: number|string,
   densities?: string,
   format?: string,
-  modifiers?: Record<string, any>
+  modifiers?: Record<string, string>
 }
 
 const props = withDefaults(defineProps<Props>(), {
