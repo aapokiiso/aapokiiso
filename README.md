@@ -1,8 +1,10 @@
 # Hi! I'm Aapo 👋
 
-I'm a software engineer from Helsinki, Finland.
+I'm a software engineer from Helsinki, Finland, currently living in Munich, Germany.
 
-I previously worked full-stack on the web platform, but right now I'm pursuing a MSc in space technology 🚀
+I previously worked for almost 10 years as a full-stack web developer, building digital commerce and healthcare services.
+
+I recently completed a M.Sc. in Space Technology, and am now working at [TALOS GmbH](https://talos-space.de/), writing on-board software for an upcoming fleet of satellites for wildlife tracking.
 
 I blog occasionally on my website [aapo.kii.so](https://aapo.kii.so).
 
