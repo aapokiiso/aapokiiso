@@ -8,17 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           lfs: true
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20
-          cache: "npm"
-          cache-dependency-path: "package-lock.json"
+          node-version: 24
       - run: npm ci
       - run: npm run generate
-      - uses: appleboy/scp-action@v0.1.7
+      - uses: appleboy/scp-action@v1
         with:
           host: ${{ vars.DEPLOY_SSH_HOST }}
           username: ${{ vars.DEPLOY_SSH_USERNAME }}

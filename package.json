@@ -29,5 +29,6 @@
     "sitemap": "^9.0.0",
     "vue": "^3.3.4",
     "vue-router": "^4.6.4"
-  }
+  },
+  "packageManager": "npm@11.8.0"
 }
