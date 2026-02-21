@@ -38,12 +38,6 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
 
-  content: {
-    experimental: {
-      sqliteConnector: 'native',
-    },
-  },
-
   feedme: {
     feeds: {
       common: {
