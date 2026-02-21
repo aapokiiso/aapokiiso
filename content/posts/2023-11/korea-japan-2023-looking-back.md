@@ -39,4 +39,4 @@ After a ferry ride back to Busan we cycled the East Coast route up to Sokcho in 
 
 ☝️ Fortunately we had some time for sightseeing too, here's us in front of the (barely visible) Himeji castle
 
-Check out the full trip in our [Korea-Japan 2023 image blog](https://korea-2023.aapo.kii.so)
+Check out the full trip in our [Korea-Japan 2023 image blog](https://korea-2023.aapo.kiiso.fi)

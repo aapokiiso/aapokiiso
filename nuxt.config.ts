@@ -1,6 +1,6 @@
 const siteUrl = typeof process.env.NUXT_PUBLIC_BASE_URL !== 'undefined'
   ? process.env.NUXT_PUBLIC_BASE_URL
-  : 'https://aapo.kii.so'
+  : 'https://aapo.kiiso.fi'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -46,7 +46,7 @@ export default defineNuxtConfig({
           description: 'Personal website of Aapo Kiiso',
           link: siteUrl,
           id: siteUrl,
-          author: { email: 'aapo@kii.so', name: 'Aapo Kiiso' }
+          author: { email: 'aapo@kiiso.fi', name: 'Aapo Kiiso' }
         },
         collections: ['posts']
       }

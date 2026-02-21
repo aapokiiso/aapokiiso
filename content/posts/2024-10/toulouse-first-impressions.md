@@ -5,7 +5,7 @@ date: 2024-10-12 23:00:00 +01:00
 
 ![Stairs of Place Saint-Pierre and the Garonne river at sunset](/media/2024-10/toulouse-first-impressions/IMG_8332.jpg){width=576 height=768}
 
-Long time no post! It's been a month now since we completed our [bike tour](https://toulouse-2024.aapo.kii.so) from Frankfurt to Toulouse.
+Long time no post! It's been a month now since we completed our [bike tour](https://toulouse-2024.aapo.kiiso.fi) from Frankfurt to Toulouse.
 Oskar went back home to Finland, but I stayed here in the [pink city](https://www.travelfranceonline.com/why-do-we-call-toulouse-the-pink-city/) to do the 2nd year of my M.Sc. degree in space tech. Here are some first impressions after a month of larping a Frenchie.
 
 <!-- more -->

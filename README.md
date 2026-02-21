@@ -6,7 +6,7 @@ I previously worked for almost 10 years as a full-stack web developer, building 
 
 I recently completed a M.Sc. in Space Technology, and am now working at [TALOS GmbH](https://talos-space.de/), writing on-board software for an upcoming fleet of satellites for wildlife tracking.
 
-I blog occasionally on my website [aapo.kii.so](https://aapo.kii.so).
+I blog occasionally on my website [aapo.kiiso.fi](https://aapo.kiiso.fi).
 
 **Some fun stuff I've done:**
 
@@ -23,7 +23,7 @@ I blog occasionally on my website [aapo.kii.so](https://aapo.kii.so).
 I've done two long tours with my bike. For both of these trips I built a static website that pulls photos out of a Google Photos album and shows them on a map, making it easy to follow along.
 
 - [aapokiiso/korea-2023](https://github.com/aapokiiso/korea-2023) South-Korea and Japan in 2023
-- [aapokiiso/toulouse-2024](https://github.com/aapokiiso/toulouse-2024) Towards Toulouse in 2024 (I'm studying there right now)
+- [aapokiiso/toulouse-2024](https://github.com/aapokiiso/toulouse-2024) Towards Toulouse in 2024, where I studied the 2nd year of my master's.
 
 🤝 Open source
 

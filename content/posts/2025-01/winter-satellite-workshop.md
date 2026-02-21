@@ -6,7 +6,7 @@ date: 2025-01-30 20:30:00 +01:00
 ![Me and Benjamin presenting our stratospheric balloon course](/media/2025-01/winter-satellite-workshop/balloon-presentation.jpg)
 
 After just two weeks in Toulouse after the Christmas holidays, I visited Helsinki (again!) last week.
-Just like [last year](https://aapo.kii.so/posts/2024-01/finnish-winter-satellite-workshop), I was there to take part in the ever-growing [Winter Satellite Workshop](https://spaceworkshop.fi/) conference.
+Just like [last year](https://aapo.kiiso.fi/posts/2024-01/finnish-winter-satellite-workshop), I was there to take part in the ever-growing [Winter Satellite Workshop](https://spaceworkshop.fi/) conference.
 
 <!-- more -->
 
