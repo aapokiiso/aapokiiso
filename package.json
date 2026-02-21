@@ -8,14 +8,14 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "patch-package && nuxt prepare",
-    "lint": "eslint --ext .js,.cjs,.ts,.cts,.vue .",
-    "lint:fix": "npm run lint -- --fix"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
     "@heroicons/vue": "^2.0.18",
     "@nuxt/content": "^3.11.0",
     "@nuxt/devtools": "latest",
-    "@nuxt/eslint": "^1.13.0",
+    "@nuxt/eslint": "^1.15.1",
     "@nuxt/image": "^2.0.0",
     "@nuxt/scripts": "^0.13.2",
     "@nuxtjs/color-mode": "^4.0.0",

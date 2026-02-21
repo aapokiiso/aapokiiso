@@ -38,6 +38,12 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
 
+  content: {
+    experimental: {
+      sqliteConnector: 'native',
+    },
+  },
+
   feedme: {
     feeds: {
       common: {
@@ -46,11 +52,11 @@ export default defineNuxtConfig({
           description: 'Personal website of Aapo Kiiso',
           link: siteUrl,
           id: siteUrl,
-          author: { email: 'aapo@kiiso.fi', name: 'Aapo Kiiso' }
+          author: { email: 'aapo@kiiso.fi', name: 'Aapo Kiiso' },
         },
-        collections: ['posts']
-      }
-    }
+        collections: ['posts'],
+      },
+    },
   },
 
   compatibilityDate: '2024-10-12',
