@@ -24,7 +24,7 @@
     "@unhead/vue": "^2.0.5",
     "better-sqlite3": "^12.6.2",
     "date-fns-tz": "^3.0.0",
-    "nuxt": "^4.3.1",
+    "nuxt": "^4.4.2",
     "nuxt-feedme": "^2.1.0",
     "patch-package": "^8.0.0",
     "sitemap": "^9.0.0",
